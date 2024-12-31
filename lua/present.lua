@@ -265,9 +265,6 @@ M.start_presentation = function(opts)
     vim.api.nvim_buf_set_lines(state.floats.footer.buf, 0, -1, false, { footer })
   end
 
-  -- filetype = markdown
-  -- buftype = nofile
-  -- bufpath = ''
   present_keymap("n", "<M-n>", function()
     state.current_slide = math.min(state.current_slide + 1, #state.parsed.slides)
     set_slide_content(state.current_slide)
@@ -276,6 +273,20 @@ M.start_presentation = function(opts)
   present_keymap("n", "<M-N>", function()
     state.current_slide = math.max(state.current_slide - 1, 1)
     set_slide_content(state.current_slide)
+  end)
+
+  present_keymap("n", "L", function()
+    state.current_slide = math.min(state.current_slide + 1, #state.parsed.slides)
+    set_slide_content(state.current_slide)
+  end)
+
+  present_keymap("n", "H", function()
+    state.current_slide = math.max(state.current_slide - 1, 1)
+    set_slide_content(state.current_slide)
+  end)
+
+  present_keymap("n", "N", function()
+    vim.o.number = not vim.o.number
   end)
 
   present_keymap("n", "q", function()
@@ -335,6 +346,14 @@ M.start_presentation = function(opts)
     cmdheight = {
       original = vim.o.cmdheight,
       present = 0,
+    },
+    wrap = {
+      original = false,
+      present = true,
+    },
+    spell = {
+      original = true,
+      present = false,
     },
   }
 
