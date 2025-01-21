@@ -332,17 +332,35 @@ M.start_presentation = function(opts)
     vim.api.nvim_buf_set_lines(state.floats.footer.buf, 0, -1, false, { footer })
   end
 
-  present_keymap("n", "n", function()
+  present_keymap("n", "<M-n>", function()
     state.current_slide = math.min(state.current_slide + 1, #state.parsed.slides)
     set_slide_content(state.current_slide)
   end)
 
-  present_keymap("n", "p", function()
+  present_keymap("n", "<M-N>", function()
     state.current_slide = math.max(state.current_slide - 1, 1)
     set_slide_content(state.current_slide)
   end)
 
+  present_keymap("n", "L", function()
+    state.current_slide = math.min(state.current_slide + 1, #state.parsed.slides)
+    set_slide_content(state.current_slide)
+  end)
+
+  present_keymap("n", "H", function()
+    state.current_slide = math.max(state.current_slide - 1, 1)
+    set_slide_content(state.current_slide)
+  end)
+
+  present_keymap("n", "N", function()
+    vim.o.number = not vim.o.number
+  end)
+
   present_keymap("n", "q", function()
+    vim.api.nvim_win_close(state.floats.body.win, true)
+  end)
+
+  present_keymap("n", "<ESC>", function()
     vim.api.nvim_win_close(state.floats.body.win, true)
   end)
 
