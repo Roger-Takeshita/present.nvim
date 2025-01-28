@@ -414,10 +414,10 @@ M.start_presentation = function(opts)
       original = vim.o.cmdheight,
       present = 0,
     },
-    guicursor = {
-      original = vim.o.guicursor,
-      present = "n:NormalFloat",
-    },
+    -- guicursor = {
+    --   original = vim.o.guicursor,
+    --   present = "n:NormalFloat",
+    -- },
     wrap = {
       original = vim.o.wrap,
       present = true,
